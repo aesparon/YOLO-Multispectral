@@ -308,27 +308,38 @@ def merge_files(input_folders, output_folder):
 
 
 
-def stack_RGB_set_uint8_sort_train_val_test (images_merge_band_images , uint16_to_uint8_method ):
+def stack_RGB_set_uint8_sort_train_val_test (images_merge_band_images , uint16_to_uint8_method , labels_path_to_merge_RGB):
 
     #input_folder_RGB = "./weedsgalore-dataset/images_merge/"
     #output_folder_RGB_uint8 = "./weedsgalore-dataset/RGB/RGB_uint16/"
 
+    split_files_path  = os.path.normpath(images_merge_band_images)
+    # Return the parent directory
+    split_files_path = os.path.dirname(split_files_path)
+    split_files_path = os.path.join(split_files_path , 'splits' )
+
 
     # temp  stack uint16
-    temp_output_folder_RGB_uint16 =  "./weedsgalore-dataset/RGB/RGB_uint16/"
+    #temp_output_folder_RGB_uint16 =  "./weedsgalore-dataset/RGB/RGB_uint16/"
+    temp_output_folder_RGB_uint16 =  labels_path_to_merge_RGB +  "/RGB_uint16/"
+    
 
     # Stack RGB bands
     batch_stack_rgb_triplets(images_merge_band_images, temp_output_folder_RGB_uint16)
 
-    folder_RGB_uint8 = './weedsgalore-dataset/RGB/RGB_uint8_' + uint16_to_uint8_method + '/'
+    #folder_RGB_uint8 = './weedsgalore-dataset/RGB/RGB_uint8_' + uint16_to_uint8_method + '/'
+    folder_RGB_uint8 = labels_path_to_merge_RGB +  '//RGB_uint8_' + uint16_to_uint8_method + '/'
+     
     convert_folder_uint16_to_uint8(temp_output_folder_RGB_uint16, folder_RGB_uint8, method=uint16_to_uint8_method)
 
     train_val_test_list = ['train' , 'val', 'test']
-    output_RGB_train_val_test_path = './weedsgalore-dataset/train_val_test/RGB/'
+    #output_RGB_train_val_test_path = './weedsgalore-dataset/train_val_test/RGB/'
+    output_RGB_train_val_test_path =  labels_path_to_merge_RGB         #'./weedsgalore-dataset/train_val_test/RGB/'
     for train_val_test in train_val_test_list: 
 
         #  RGB  ############################################################################################
-        txt_split_file_to_sort = './weedsgalore-dataset/weedsgalore-dataset/splits/' + train_val_test + '.txt'    # this folder have train/val/test split used for experimental traonong
+        #txt_split_file_to_sort =  labels_path_to_merge_RGB +  './weedsgalore-dataset/weedsgalore-dataset/splits/' + train_val_test + '.txt'    # this folder have train/val/test split used for experimental traonong
+        txt_split_file_to_sort = split_files_path + '/' + train_val_test + '.txt'    # this folder have train/val/test split used for experimental traonong
         #input_instances_folder =  folder_RGB_uint8   #'./weedsgalore-dataset/RGB/RGB_uint8_normalize/'
         output_folder_instances = output_RGB_train_val_test_path + train_val_test + '/images/'
 
