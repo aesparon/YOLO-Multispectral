@@ -33,7 +33,7 @@ def patch_yolo_seg_ckpt(model_base, output_model_train , yolo_source_path , in_c
     # path to modified yolo source code for multispectral training
     #yolo_source_path = 'D:/PD/yolo_mod/working2/yolo_source/yolo_2025_06_04_mod/ultralytics-main/'
     sys.path.insert(1, yolo_source_path)
-    import ultralytics
+    #import ultralytics
     from ultralytics import YOLO
     from ultralytics.nn.modules.conv import Conv
     #from ultralytics.nn.tasks import SegmentationModel
