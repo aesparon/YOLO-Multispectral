@@ -11,21 +11,27 @@ from pathlib import Path
 import pandas as pd
 from collections import Counter
 
-import torch
+#import torch
 
 # code folder
-yolo_source_path = 'D:/PD/Publications/Yolo_mod/github/YOLO-Multispectral/code/'
-sys.path.insert(1, yolo_source_path)
+#yolo_source_path = 'D:/PD/Publications/Yolo_mod/github/YOLO-Multispectral/code/'
+#sys.path.insert(1, yolo_source_path)
 
 #from mod_pt_model_seg_v15 import *
-from mod_pt_model_seg_v40 import *
+#from mod_pt_model_seg_v40 import *
 
 #  NOTE if use_source = True will use source - NOT package ULTRLYTICS in python environment
-from ultralytics import YOLO
+#from ultralytics import YOLO
+
+
+
 
 
 
 def create_train_yaml(images_train_path, images_val_path ,classes_list , number_of_channels, output_yaml ,  images_test_path = None):
+
+
+
     ###    CREATE data - YAML file for training    #######################################################################
     yaml_content = "train: " + images_train_path + "\n"
     yaml_content =yaml_content +  "val: " + images_val_path + "\n"
@@ -44,6 +50,7 @@ def create_train_yaml(images_train_path, images_val_path ,classes_list , number_
     yaml_content =yaml_content +  names_str + "\n"
 
     #output_yaml =  project_base_path + "data_" + train_data + ".yaml"
+    
 
     with Path(output_yaml).open('w') as f:
         f.write(yaml_content) 
@@ -53,7 +60,10 @@ def create_train_yaml(images_train_path, images_val_path ,classes_list , number_
 
 
 
-def eval_best_last(model_save_path , output_yaml , best_last ):
+def eval_best_last(model_save_path , output_yaml , best_last , yolo_source_path ):
+    sys.path.insert(0, yolo_source_path)
+    from ultralytics import YOLO
+
     #  if output_model_train folder already exists model.train will create a new folder with incremented postfix
     #model_save_path = str(results.save_dir)
 
