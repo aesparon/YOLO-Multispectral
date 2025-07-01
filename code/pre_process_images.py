@@ -318,12 +318,10 @@ def stack_RGB_set_uint8_sort_train_val_test (images_merge_band_images , uint16_t
     split_files_path = os.path.dirname(split_files_path)
     split_files_path = os.path.join(split_files_path , 'splits' )
 
-
     # temp  stack uint16
     #temp_output_folder_RGB_uint16 =  "./weedsgalore-dataset/RGB/RGB_uint16/"
     temp_output_folder_RGB_uint16 =  labels_path_to_merge_RGB +  "/RGB_uint16/"
     
-
     # Stack RGB bands
     batch_stack_rgb_triplets(images_merge_band_images, temp_output_folder_RGB_uint16)
 
@@ -345,18 +343,47 @@ def stack_RGB_set_uint8_sort_train_val_test (images_merge_band_images , uint16_t
 
         #sort_images (txt_file_to_sort ,input_semantics_folder ,  output_folder_semantics)
         sort_images_from_split_files (txt_split_file_to_sort ,folder_RGB_uint8 ,  output_folder_instances)
-
-
-        
-
     return output_RGB_train_val_test_path
 
-
-
-
-
-def stack_RGBRN_set_uint8_sort_train_val_test (images_merge_band_images , uint16_to_uint8_method ):
+def stack_RGBRN_set_uint8_sort_train_val_test (images_merge_band_images , uint16_to_uint8_method , labels_path_to_merge_RGBRN ):
     
+    split_files_path  = os.path.normpath(images_merge_band_images)
+    # Return the parent directory
+    split_files_path = os.path.dirname(split_files_path)
+    split_files_path = os.path.join(split_files_path , 'splits' )
+
+    # temp  stack uint16
+    #temp_output_folder_RGB_uint16 =  "./weedsgalore-dataset/RGBRN/RGBRN_uint16/"
+    temp_output_folder_RGBRN_uint16 =  labels_path_to_merge_RGBRN +  "/RGBRN_uint16/"
+    
+    # Stack RGB bands
+    batch_stack_5band (images_merge_band_images, temp_output_folder_RGBRN_uint16)
+
+    #folder_RGB_uint8 = './weedsgalore-dataset/RGBRN/RGBRN_uint8_' + uint16_to_uint8_method + '/'
+    folder_RGB_uint8 = labels_path_to_merge_RGBRN +  '//RGBRN_uint8_' + uint16_to_uint8_method + '/'
+     
+    convert_folder_uint16_to_uint8(temp_output_folder_RGBRN_uint16, folder_RGB_uint8, method=uint16_to_uint8_method)
+
+    train_val_test_list = ['train' , 'val', 'test']
+    #output_RGB_train_val_test_path = './weedsgalore-dataset/train_val_test/RGB/'
+    output_RGBRN_train_val_test_path =  labels_path_to_merge_RGBRN         #'./weedsgalore-dataset/train_val_test/RGB/'
+    for train_val_test in train_val_test_list: 
+
+        #  RGB  ############################################################################################
+        #txt_split_file_to_sort =  labels_path_to_merge_RGBRN +  './weedsgalore-dataset/weedsgalore-dataset/splits/' + train_val_test + '.txt'    # this folder have train/val/test split used for experimental traonong
+        txt_split_file_to_sort = split_files_path + '/' + train_val_test + '.txt'    # this folder have train/val/test split used for experimental traonong
+        #input_instances_folder =  folder_RGB_uint8   #'./weedsgalore-dataset/RGB/RGB_uint8_normalize/'
+        output_folder_instances = output_RGBRN_train_val_test_path + train_val_test + '/images/'
+
+        #sort_images (txt_file_to_sort ,input_semantics_folder ,  output_folder_semantics)
+        sort_images_from_split_files (txt_split_file_to_sort ,folder_RGB_uint8 ,  output_folder_instances)
+    return output_RGBRN_train_val_test_path
+
+
+
+
+
+
 
     # Step 3.  Stack RGBRN images and convert from RGBRN uint16 to uint8   #######################################################3
     #input_folder_RGBRN = "./weedsgalore-dataset/images_merge/"
@@ -364,7 +391,6 @@ def stack_RGBRN_set_uint8_sort_train_val_test (images_merge_band_images , uint16
 
     # Stack RGBNR bands
     batch_stack_5band(images_merge_band_images, temp_output_folder_RGBRN_uint16)
-
 
     folder_RGBRN_uint8 = './weedsgalore-dataset/RGBRN/RGBRN_uint8_' + uint16_to_uint8_method + '/'
     convert_folder_uint16_to_uint8(temp_output_folder_RGBRN_uint16, folder_RGBRN_uint8, method=uint16_to_uint8_method)
@@ -379,7 +405,6 @@ def stack_RGBRN_set_uint8_sort_train_val_test (images_merge_band_images , uint16
 
         #sort_images (txt_file_to_sort ,input_semantics_folder ,  output_folder_semantics)
         sort_images_from_split_files (txt_split_file_to_sort ,folder_RGBRN_uint8 ,  output_folder_instances)
-
 
     return output_RGBRN_train_val_test_path
 
