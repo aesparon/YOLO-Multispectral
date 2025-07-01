@@ -8,31 +8,40 @@ from pathlib import Path
 import torch
 import torch.nn as nn
 
-# path
-yolo_source_path = 'D:/PD/yolo_mod/working2/yolo_source/yolo_2025_06_04_mod/ultralytics-main/'
-sys.path.insert(1, yolo_source_path)
-import ultralytics
-from ultralytics import YOLO
-from ultralytics.nn.modules.conv import Conv
-#from ultralytics.nn.tasks import SegmentationModel
-from ultralytics.cfg import get_cfg
-
-
-
-
-# Load no_TL model with trusted unpickling
-from ultralytics.nn.tasks import SegmentationModel
-
-
-from patch_backbone_with_attention import *
+# # path
+# yolo_source_path = 'D:/PD/yolo_mod/working2/yolo_source/yolo_2025_06_04_mod/ultralytics-main/'
+# sys.path.insert(1, yolo_source_path)
+# import ultralytics
+# from ultralytics import YOLO
+# from ultralytics.nn.modules.conv import Conv
+# #from ultralytics.nn.tasks import SegmentationModel
+# from ultralytics.cfg import get_cfg
+# # Load no_TL model with trusted unpickling
+# from ultralytics.nn.tasks import SegmentationModel
 
 
 
 
 
-def patch_yolo_seg_ckpt(model_base, output_model_train , in_channels=5, nc=5 , channel_init_mode='avg' , use_cbam=False, use_eca=False, use_spectral=False, use_dropblock=False, drop_prob=0.1):
+
+
+
+def patch_yolo_seg_ckpt(model_base, output_model_train , yolo_source_path , in_channels=5, nc=5 , channel_init_mode='avg' , use_cbam=False, use_eca=False, use_spectral=False, use_dropblock=False, drop_prob=0.1):
     print(f"\n📦 Loading pretrained YOLO segmentation model: {model_base}")
 
+
+    # path to modified yolo source code for multispectral training
+    #yolo_source_path = 'D:/PD/yolo_mod/working2/yolo_source/yolo_2025_06_04_mod/ultralytics-main/'
+    sys.path.insert(1, yolo_source_path)
+    import ultralytics
+    from ultralytics import YOLO
+    from ultralytics.nn.modules.conv import Conv
+    #from ultralytics.nn.tasks import SegmentationModel
+    from ultralytics.cfg import get_cfg
+    # Load no_TL model with trusted unpickling
+    from ultralytics.nn.tasks import SegmentationModel
+
+    from patch_backbone_with_attention import patch_backbone_with_attention
 
 
     ####   UPDATE later just pass   yolov11x-seg.yaml    OR    yolov11x-seg.pt
