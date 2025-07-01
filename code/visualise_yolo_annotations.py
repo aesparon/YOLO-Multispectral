@@ -3,6 +3,7 @@ import os
 import random
 import cv2
 import matplotlib.pyplot as plt
+import numpy as np
 
 def plot_yolo_segmentation(images_dir, labels_dir, class_names=None, num_samples=5):
     image_files = [f for f in os.listdir(images_dir) if f.lower().endswith(('.jpg', '.png', '.tif'))]
