@@ -1,4 +1,4 @@
-## YOLO-MultiSpectral: Multispectral Object Detection and Segmentation..
+## YOLO-MultiSpectral: Multispectral Object Detection and Segmentation.
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/)
