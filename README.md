@@ -12,13 +12,13 @@
 
 ## 🔍 Overview
 
-**YOLO-MultiSpectral** is a deep learning framework based YOLO that supports multispectral imagery with 4 or more bands (e.g., RGB + NIR + RedEdge) for object detection and instance segmentation. Designed for UAV imagery, precision agriculture, and environmental monitoring, it integrates spatial-spectral attention mechanisms like **CBAM** and **ECA** to enhance accuracy and generalization.
+**YOLO-MultiSpectral** is a deep learning framework based on YOLO that supports multispectral imagery with 4 or more bands (e.g., RGB + NIR + RedEdge) for object detection and instance segmentation. Designed for UAV imagery, precision agriculture, and environmental monitoring, it integrates spatial-spectral attention mechanisms like **CBAM** and **ECA** to enhance accuracy and generalization.
 
 ---
 
 ## 🚀 Features
 - ✅ 4+ band multispectral TIFF input support (current support for uint8 and soon to be modified for uint16)
-- ✅ +10% mAP@50 gain over standard RGB YOLO
+- ✅ +10% mAP@50 gain over standard RGB images
 - ✅ Ability to leverage transfer learning to MultiSpectral inputs
 - ✅ Attention modules for spectral feature enhancement:
   - CBAM (Convolutional Block Attention Module)
