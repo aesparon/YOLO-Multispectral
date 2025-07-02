@@ -1,4 +1,4 @@
-# YOLO-MultiSpectral: Multispectral Object Detection and Segmentation with YOLO
+# YOLO-MultiSpectral: Multispectral Object Detection and Segmentation.
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/)
@@ -6,7 +6,7 @@
 [![Stars](https://img.shields.io/github/stars/aesparon/YOLO-MultiSpectral.svg?style=social)](https://github.com/aesparon/YOLO-MultiSpectral/stargazers)
 [![DOI](https://zenodo.org/badge/123456789.svg)](https://zenodo.org/badge/latestdoi/123456789)
 
-> **Object detection and segmentation in 4+ channel multispectral imagery, powered by enhanced YOLOv3-v12+ backbones.**
+> ***Object detection and segmentation in 4+ channel multispectral imagery, powered by enhanced YOLOv3-v12+ backbones.***
 
 ---
 

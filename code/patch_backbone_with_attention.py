@@ -4,6 +4,59 @@ from ultralytics import YOLO
 #from ultralytics.utils.loss import v8SegLoss
 from ultralytics.nn.modules import Conv
 
+
+#  SpectralConv
+# Purpose: Replaces standard convolution with a spectral-separable design — depthwise (per-channel) convolution followed by pointwise (combination) convolution.
+
+# Benefit: Encourages learning distinct spectral features in multispectral/hyperspectral imagery.
+
+# Reference: Inspired by Cheng et al., 2018 “Deep Spectral–Spatial Classification of Hyperspectral Images” using spectral–spatial decompositions.
+
+# 🔹 CBAM – Convolutional Block Attention Module
+# Purpose: Adds channel and spatial attention to boost feature focus.
+
+# Mechanism: Applies sequential channel attention (via global avg/max pooling) and spatial attention (via conv over feature maps).
+
+# Benefit: Enhances object detection/segmentation performance by emphasizing informative features.
+
+# Reference: Woo et al., 2018 – CBAM: Convolutional Block Attention Module (ECCV).
+
+# 🔹 ECA – Efficient Channel Attention
+# Purpose: Provides lightweight channel-wise attention using 1D convolution without dimensionality reduction.
+
+# Benefit: Efficient and improves performance without high computation cost.
+
+# Reference: Wang et al., 2020 – ECA-Net: Efficient Channel Attention for Deep Convolutional Neural Networks (CVPR).
+
+# 🔹 DropBlock2D
+# Purpose: Regularization method that drops contiguous regions (blocks) of feature maps during training.
+
+# Benefit: Prevents overfitting and encourages robustness in learned features.
+
+# Reference: Ghiasi et al., 2018 – DropBlock: A Regularization Method for Convolutional Networks (NeurIPS).
+
+# 🔹 norm_fn
+# Purpose: Replaces BatchNorm with GroupNorm, which is more stable on small batch sizes.
+
+# Reference: Wu & He, 2018 – Group Normalization (ECCV).
+
+# 🔹 bbox_iou (placeholder)
+# Purpose: Placeholder for IoU (Intersection over Union) computation, specifically EIoU or other variants.
+
+# Note: Replace with Ultralytics implementation or Zhang et al., 2021 – Focal and Efficient IoU Loss for Accurate Bounding Box Regression.
+
+# 🔹 focal_eiou_loss
+# Purpose: Combines Focal Loss for classification and EIoU loss for bounding box regression.
+
+# Reference:
+
+# Focal Loss: Lin et al., 2017 – Focal Loss for Dense Object Detection (ICCV).
+
+# EIoU: Zheng et al., 2023 – Iou-aware and Efficient IoU Loss Variants.
+
+
+
+
 # ------------------------ Spectral Convolution ------------------------
 class SpectralConv(nn.Module):
     def __init__(self, in_channels, out_channels):
