@@ -38,7 +38,13 @@
 - Output: Bounding boxes + instance masks
 
 
-## 🧪 Quick Start using weed-galore dataset
+## 🧪 Quick Start using Weeds-galore dataset 
+
+This repo includes training support for the **Weeds-Galore** dataset:
+- 5-band UAV imagery (R, G, B, NIR, RedEdge)
+- Classes: *maize, amaranth, grass, quickweed, other*
+- Achieved **+10% mAP@50** over YOLO (RGB)
+
 
 ## 🎥 Watch this for overview (UNDER CONSTUCTION)
 
@@ -80,17 +86,13 @@ ADD EXCEL RESULTS
 
 ---
 
-## 📦 Installation
+## 📦 Local installation
 
 ### Requirements:
 ```bash
-pip install -r ./code/requirements.txt
+ADD STEPS HERE
 ```
 
-
----
-
-## 🧪 Quick Start using weed-galore dataset
 
 
 ---
@@ -104,15 +106,6 @@ YOLO-MultiSpectral is modular by design. You can:
 - 📊 Integrate NDVI/NDRE indices into the model input
 
 We welcome contributions — see [CONTRIBUTING.md](CONTRIBUTING.md)!
-
----
-
-## 📈 Case Study: Weeds-Galore Dataset
-
-This repo includes training support for the **Weeds-Galore** dataset:
-- 5-band UAV imagery (R, G, B, NIR, RedEdge)
-- Classes: *maize, amaranth, grass, quickweed, other*
-- Achieved **+10% mAP@50** over YOLO (RGB)
 
 ---
 
