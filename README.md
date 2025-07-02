@@ -32,12 +32,6 @@
 ---
 
 
-## 🧠 Model Architecture
-- Backbone: Modified YOLO (v3-v12) with CBAM, ECA, and spectral convolutions
-- Input :  images (png,tiff required for 5+ channel support)
-- Output: Bounding boxes + instance masks
-
-
 ## 🧪 Quick Start using Weeds-galore dataset 
 
 This repo includes training support for the **Weeds-Galore** dataset:
