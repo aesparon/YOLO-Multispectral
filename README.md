@@ -34,23 +34,37 @@
 
 ## 🧠 Model Architecture
 - Backbone: Modified YOLO (v3-v12) with CBAM, ECA, and spectral convolutions
-- Input :  images (png,tiff required for 5 channel support)
+- Input :  images (png,tiff required for 5+ channel support)
 - Output: Bounding boxes + instance masks
 
 
 ## 🧪 Quick Start using weed-galore dataset
 
-### Option 1: Run Instantly on Google Colab
+## 🎥 Watch this for overview
+
+[![Coming soon](https://img.shields.io/badge/Demo-YouTube-red)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
+
+### Run Instantly on Google Colab
 <a href="https://colab.research.google.com/github/aesparon/YOLO-MultiSpectral/blob/main/examples/notebooks/YOLO-MultiSpectral_demo.ipynb" target="_blank">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab" style="height:30px;">
 </a>
 
-## 🎥 Link to youtube demo usage
 
-[![Coming soon](https://img.shields.io/badge/Demo-YouTube-red)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
+## 📁 Preliminary results
+```
+ADD EXCEL RESULTS
 
 
 ---
+
+
+
+
+
+
+
+
+
 
 ## 📁 Repository Structure
 ```
