@@ -40,7 +40,7 @@
 
 ## 🧪 Quick Start using weed-galore dataset
 
-## 🎥 Watch this for overview
+## 🎥 Watch this for overview (UNDER CONSTUCTION)
 
 [![Coming soon](https://img.shields.io/badge/Demo-YouTube-red)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
 
@@ -62,7 +62,7 @@ ADD EXCEL RESULTS
 
 
 
-
+---
 
 
 
@@ -86,42 +86,15 @@ ADD EXCEL RESULTS
 ## 📦 Installation
 
 ### Requirements:
-
-# requirements txt -> refer colab example
-<!-- - Python 3.8+
-- PyTorch ≥ 1.10  # recomended version XXX
-- Ultralytics YOLO
-- OpenCV, NumPy, tifffile, PyYAML -->
-
 ```bash
-pip install -r requirements.txt
+pip install -r ./code/requirements.txt
 ```
 
-### Optional (Anaconda Environment):
-```bash
-conda create -n yolo-multispectral python=3.10
-conda activate yolo-multispectral
-pip install -r requirements.txt
-```
 
 ---
 
 ## 🧪 Quick Start using weed-galore dataset
 
-
-### Local pc setup
-```bash
-python train_evaluate.py --data data.yaml --imgsz 1024 --epochs 100 --device 0
-```
-- Ensure your `.yaml` file reflects the number of input channels and class labels.
-- Outputs are saved in the `runs/` folder with metrics, predictions, and checkpoints.
-
----
-
-## 🗂️ Input Format
-- **Image format**: `.tif`, `.png` with 4+ spectral bands (current support for uint8 and soon to be modified for uint16)
-- **Labels**: YOLO format `.txt` files with polygon coordinates or bounding boxes
-- **Data YAML**: follows Ultralytics `data.yaml` format, with custom paths and class names
 
 ---
 
@@ -146,13 +119,6 @@ This repo includes training support for the **Weeds-Galore** dataset:
 
 ---
 
-## 📊 Evaluation
-Run validation on a 5-band TIFF dataset:
-```bash
-from ultralytics import YOLO
-model = YOLO('yolov8n-seg.yaml')
-model.val(data='data.yaml')
-```
 
 ---
 
