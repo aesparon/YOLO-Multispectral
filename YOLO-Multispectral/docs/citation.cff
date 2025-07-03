@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "YOLO-MultiSpectral: A Deep Learning Framework for Multispectral Object Detection and Instance Segmentation"
+authors:
+  - family-names: Esparon
+    given-names: Andrew
+    affiliation: Charles Darwin University
+    orcid: https://orcid.org/0009-0001-7436-1568
+date-released: 2025-06-26
+repository-code: https://github.com/aesparon/YOLO-MultiSpectral
+version: "0.1.0"
+license: MIT
