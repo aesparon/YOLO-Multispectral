@@ -1,7 +1,7 @@
 # YOLO-Multispectral 🚀
 
 <!--
-  YOLO-Multispectral: Modified Ultralytics YOLOv8/v11 for 4- and 5-band multispectral object detection and segmentation.
+  YOLO-Multispectral: Modified Ultralytics YOLOv8/v11 for 4+ multispectral object detection and segmentation.
   Keywords: YOLO multispectral, multispectral object detection, RGBN, RGB+NIR, YOLOv8, YOLOv11, drone imagery, vegetation segmentation, CBAM, ECA, geospatial deep learning, QGIS, remote sensing.
 -->
 
@@ -33,20 +33,22 @@ Standard RGB models often overlook critical spectral cues found in vegetation, s
 ## 💡 Key Features
 
 - ✅ TIFF multispectral input (4+ channels)
-- ✅ Custom YOLOv8/v11/v12 models with 5-band input patching
+- ✅ Custom YOLOv8/v11/v12 models with 4+ input patching
+- ✅ Transfer learning from RGB to multispectral weights
 - ✅ SpectralConv, CBAM, ECA, DropBlock, and GroupNorm modules
 - ✅ Mask + Box segmentation support (v8/v11); Box-only for v12
 - ✅ GeoTIFF & tiled dataset compatibility (e.g., QGIS-ready outputs)
-- ✅ Transfer learning from RGB to multispectral weights
+
 
 ---
 
 ## 📊 Results
 
+These are preliminary results applying YOLO-multispectral to weeds-galore public dataset [weeds-galore dataset](https://arxiv.org/abs/1807.06521) .
 <p align="center">
   <img src="assets/figure_2_and 5_class.jpg" alt=" 2- class and 5-Class Detection Example" width="80%">
   <br>
-  <em>Figure 1: Example results on 5-class multispectral weed segmentation.</em>
+  <em>Figure 1: Example results on 5-class multispectral weed segmentation. Refer Colbab rxample below to duplicate results</em>
 </p>
 
 
@@ -76,6 +78,10 @@ Standard RGB models often overlook critical spectral cues found in vegetation, s
 ## 🚀 Quick Links
 
 ### 📘 Example Notebook (in progress)
+This notebook demonstrates how to to quickly use modified YOLO models for 5 channel input using weeds-galore dataset.
+
+[Dataset weeds galore](https://github.com/GFZ/weedsgalore). 
+RGB and RGBRN (red,green,blue,red edge, Near infra red)
 
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/aesparon/YOLO-MultiSpectral/blob/main/examples/notebooks/YOLO-MultiSpectral_demo.ipynb)
 
