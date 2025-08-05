@@ -15,7 +15,7 @@
 
 ## 🔍 What is YOLO-Multispectral?
 
-**YOLO-Multispectral** is an open-source extension of **Ultralytics YOLOv8/v11**, tailored to support **4- to 5-band multispectral remote sensing imagery** (e.g., RGB + NIR, RedEdge) for **object detection** and **semantic segmentation**.  
+**YOLO-Multispectral** is an open-source extension of **Ultralytics YOLOv8/v11**, tailored to support **4+ band multispectral remote sensing imagery** (e.g., RGB + NIR, RedEdge) for **object detection** and **semantic segmentation**.  
 It includes support for **geospatial metadata**, **TIFF inputs**, and **attention-enhanced backbones** (CBAM, ECA).
 
 ---
