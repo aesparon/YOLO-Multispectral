@@ -48,7 +48,7 @@ These are preliminary results applying YOLO-multispectral to weeds-galore public
 <p align="center">
   <img src="assets/figure_2_and 5_class.jpg" alt=" 2- class and 5-Class Detection Example" width="80%">
   <br>
-  <em>Figure 1: Example results on 5-class multispectral weed segmentation. Refer Colbab rxample below to duplicate results</em>
+  <em>Figure 1: Example results for RGB with and without transfer learning and RGB, red edge, and NIR multispectral weed segmentation ([Dataset weeds galore](https://github.com/GFZ/weedsgalore).). Refer Colbab rxample below to duplicate results</em>
 </p>
 
 
