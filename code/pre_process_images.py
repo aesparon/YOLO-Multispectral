@@ -384,6 +384,55 @@ def stack_RGBRN_set_uint8_sort_train_val_test (images_merge_band_images , uint16
 
 
 
+# PCA rest
+def pca_5band_to_3band(input_path, output_path):
+    with rasterio.open(input_path) as src:
+        if src.count != 5:
+            print(f"❌ Skipping {input_path} (not 5 bands)")
+            return
+
+        profile = src.profile
+        img = src.read().astype(np.float32)  # (bands, height, width)
+        height, width = src.height, src.width
+
+    # Reshape to (pixels, bands)
+    img_reshaped = img.reshape(5, -1).T
+
+    # PCA transform
+    pca = PCA(n_components=3)
+    img_pca = pca.fit_transform(img_reshaped)
+
+    # Normalize to 0–255
+    img_pca_norm = np.zeros_like(img_pca)
+    for i in range(3):
+        band = img_pca[:, i]
+        band = (band - band.min()) / (band.max() - band.min()) * 255
+        img_pca_norm[:, i] = band
+
+    # Reshape back to (3, H, W)
+    img_pca_uint8 = img_pca_norm.reshape(height, width, 3).astype(np.uint8)
+    img_pca_uint8 = img_pca_uint8.transpose(2, 0, 1)
+
+    # Update profile and save
+    profile.update(count=3, dtype=rasterio.uint8)
+    with rasterio.open(output_path, 'w', **profile) as dst:
+        dst.write(img_pca_uint8)
+
+    print(f"✅ Saved: {output_path}")
+
+
+def batch_convert_folder(input_folder, export_folder):
+    os.makedirs(export_folder, exist_ok=True)
+
+    for filename in os.listdir(input_folder):
+        if filename.lower().endswith(".tif") or filename.lower().endswith(".tiff"):
+            input_path = os.path.join(input_folder, filename)
+            output_path = os.path.join(export_folder, filename)
+            pca_5band_to_3band(input_path, output_path)
+
+            
+
+
 
     # Step 3.  Stack RGBRN images and convert from RGBRN uint16 to uint8   #######################################################3
     #input_folder_RGBRN = "./weedsgalore-dataset/images_merge/"
