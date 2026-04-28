@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+title: YOLO-Multispectral
+message: Please cite this work when using YOLO-Multispectral.
+authors:
+  - family-names: Esparon
+    given-names: Andrew
+    orcid: https://orcid.org/0009-0001-7436-1568
+    affiliation: Independent Researcher
+license: MIT
+keywords:
+  - YOLO
+  - multispectral
+  - deep learning
+  - object detection
+  - vegetation segmentation
+repository-code: https://github.com/aesparon/YOLO-Multispectral

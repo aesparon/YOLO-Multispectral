@@ -1,0 +1,6 @@
+train: d:\PD\Publications\Yolo_mod\github\YOLO-Multispectral_2026_01_29\test_notebook_v2_restore/YOLO-Multispectral/datasets/weeds_galore_processed/RGBRN/train/
+val: d:\PD\Publications\Yolo_mod\github\YOLO-Multispectral_2026_01_29\test_notebook_v2_restore/YOLO-Multispectral/datasets/weeds_galore_processed/RGBRN/val/
+test: d:\PD\Publications\Yolo_mod\github\YOLO-Multispectral_2026_01_29\test_notebook_v2_restore/YOLO-Multispectral/datasets/weeds_galore_processed/RGBRN/test/
+nc: 5
+channels: 5
+names: [maize,amaranth,grass,quickweed,other]
