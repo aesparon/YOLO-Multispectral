@@ -25,16 +25,6 @@ The main comparison uses four controlled experimental conditions:
 
 The core finding is that **RGB-pretrained representations remain useful after multispectral input expansion**, and that multispectral input and RGB-pretrained transfer learning provide complementary benefits.
 
-### 🔒 Reproducible release
-
-A reproducible paper snapshot is provided as a tagged release:
-
-➡️ **Release:** `rsl-transfer-learning-v1.0`
-
-https://github.com/aesparon/YOLO-Multispectral/releases/tag/rsl-transfer-learning-v1.0
-
-This release is intended to preserve the code, dataset configuration and scripts used for the Remote Sensing Letters submission.
-
 ---
 
 ## 🔍 What is YOLO Multispectral?
