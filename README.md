@@ -1,155 +1,362 @@
 # YOLO Multispectral 🚀
 
-<!--
-YOLO-Multispectral: Modified Ultralytics YOLOv11 for 4+ band multispectral object detection and instance segmentation.
-Keywords: YOLO multispectral, transfer learning, RGB+NIR, UAV imagery, weed detection, remote sensing, instance segmentation.
--->
+## Maintaining RGB-pretrained transfer learning in YOLOv11x-seg for multispectral remote-sensing instance segmentation
 
-![PyTorch](https://img.shields.io/badge/PyTorch-%E2%89%A51.10-red)
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-![License](https://img.shields.io/github/license/aesparon/YOLO-Multispectral)
-![Issues](https://img.shields.io/github/issues/aesparon/YOLO-Multispectral)
-![Stars](https://img.shields.io/github/stars/aesparon/YOLO-Multispectral)
+This repository accompanies the manuscript:
+
+**Maintaining RGB-pretrained transfer learning in YOLOv11x-seg for multispectral remote-sensing instance segmentation**
+
+Submitted to *Remote Sensing Letters* as a Method article.
 
 ---
 
-## 📄 Paper & Reproducibility (RSL Submission)
+## 📄 Paper & Reproducibility
 
-This repository accompanies the paper:
+This repository provides code, experiment configuration files, plotting scripts, result summaries and reproducibility material for a controlled multispectral YOLO transfer-learning study.
 
-**“Maintaining Transfer Learning in YOLOv11 for 4+-Band Multispectral Remote-Sensing Detection and Segmentation”**  
-(*submitted to* **Remote Sensing Letters**)
+The submitted paper evaluates whether RGB-pretrained transfer learning remains effective when **YOLOv11x-seg** is adapted from RGB input to five-band multispectral input using the public **WeedsGalore** UAV dataset.
 
-### 🔒 Reproducible release (paper snapshot)
-➡️ **Tagged release:**  
-**`rsl-transfer-learning-v1.0`**  
+The main comparison uses four controlled experimental conditions:
+
+- **RGB-scratch**
+- **RGB-transfer**
+- **MS5-scratch**
+- **MS5-transfer**
+
+The core finding is that **RGB-pretrained representations remain useful after multispectral input expansion**, and that multispectral input and RGB-pretrained transfer learning provide complementary benefits.
+
+### 🔒 Reproducible release
+
+A reproducible paper snapshot is provided as a tagged release:
+
+➡️ **Release:** `rsl-transfer-learning-v1.0`
+
 https://github.com/aesparon/YOLO-Multispectral/releases/tag/rsl-transfer-learning-v1.0
 
-This release contains:
-- Exact code used for the RSL experiments
-- Dataset configuration and training protocol
-- Scripts used to generate reported results
-
-> ⚠️ **Important:**  
-> The RSL paper evaluates **transfer learning vs training from scratch only**.  
-> Attention modules and architectural extensions are **future work** and are **not used** in the paper experiments.
+This release is intended to preserve the code, dataset configuration and scripts used for the Remote Sensing Letters submission.
 
 ---
 
 ## 🔍 What is YOLO Multispectral?
 
-**YOLO Multispectral** is an open-source extension of **Ultralytics YOLOv11**, designed to support **4+ band multispectral remote-sensing imagery** (e.g. RGB + NIR, RedEdge) for **object detection and instance segmentation**.
+**YOLO Multispectral** is an open-source extension of Ultralytics YOLO designed to support multispectral remote-sensing imagery with more than three input channels.
 
-The project focuses on **minimal architectural modification**, enabling controlled evaluation of:
-- Transfer learning from RGB-pretrained weights
-- Training-from-scratch for multispectral inputs
-- UAV-based agricultural and ecological monitoring
+The submitted paper focuses on **YOLOv11x-seg** and a five-band multispectral input configuration, referred to as **MS5**:
+
+- RGB
+- near-infrared \(NIR\)
+- red-edge
+
+The project is designed around a minimal and reproducible model adaptation:
+
+> only the first YOLOv11x-seg input-stem convolution is expanded from 3 to 5 input channels, while the remaining backbone, neck and segmentation head are kept unchanged.
+
+This design allows controlled testing of whether RGB-pretrained weights can still be useful when adapting a YOLO segmentation model to multispectral imagery.
 
 ---
 
 ## 🌿 Why Multispectral Object Detection?
 
-Standard RGB models often overlook critical spectral cues related to vegetation structure and physiology.  
-By incorporating **near-infrared (NIR)** and **red-edge (RE)** bands, multispectral models can improve discrimination under:
+Remote-sensing object detection and instance segmentation often require more than visible RGB information.
 
-- Variable illumination
-- Complex soil backgrounds
-- Overlapping foliage
-- Early growth-stage weeds
+In vegetation, agriculture and ecological monitoring, additional spectral bands such as **NIR** and **red-edge** can provide useful information related to vegetation structure, contrast and condition.
 
----
+Multispectral imagery can help when targets are difficult to separate using RGB alone, including scenes with:
 
-## 💡 Key Features (Paper-Relevant)
+- variable illumination;
+- complex soil and plant backgrounds;
+- dense or overlapping vegetation;
+- early growth-stage weeds;
+- visually similar crop and weed instances;
+- small and irregular object boundaries.
 
-- ✅ YOLOv11-seg instance segmentation
-- ✅ 4+ channel multispectral input (RGB, RGB+NIR+RE)
-- ✅ Transfer learning from RGB-pretrained weights
-- ✅ Training-from-scratch baselines
-- ✅ TIFF / GeoTIFF input support
-- ✅ UAV-scale high-resolution imagery
+However, most large pretrained computer-vision models are trained on RGB imagery. This raises an important practical question:
 
----
+> Can RGB-pretrained YOLO representations still be useful after the input stem is expanded to accept multispectral imagery?
 
-## 🧠 Architectural Extensions (Future Work)
-
-The repository also contains **experimental modules** intended for future research and **not used in the RSL paper**:
-
-| Module        | Purpose                           |
-|---------------|-----------------------------------|
-| CBAM          | Channel & spatial attention       |
-| ECA           | Lightweight channel attention     |
-| SpectralConv  | Band-specific spectral filtering  |
-| DropBlock     | Spatial regularisation            |
-| GroupNorm     | Robust normalisation              |
-
-These components are under active development and will be evaluated in **subsequent studies**.
+This repository addresses that question using a controlled scratch-versus-transfer experiment.
 
 ---
 
-## 📊 Example Results (WeedsGalore)
+## 💡 Key Features \(Paper-Relevant\)
 
-<p align="center">
-  <br>
-  <em>
-  Example RGB and RGB+NIR+RE instance segmentation results on the
-  <a href="https://github.com/GFZ/weedsgalore">WeedsGalore dataset</a>.
-  </em>
-</p>
+- ✅ YOLOv11x-seg instance segmentation
+- ✅ Five-band multispectral input: RGB+NIR+red-edge \(MS5\)
+- ✅ Minimal input-stem modification from 3 to 5 channels
+- ✅ RGB-pretrained transfer learning retained for multispectral input
+- ✅ Scratch-training baselines for both RGB and MS5
+- ✅ Controlled comparison across matched dataset splits and training settings
+- ✅ Five random seeds \(0–4\)
+- ✅ Held-out test-set reporting as mean ± standard deviation
+- ✅ Bounding-box and instance-mask metrics
+- ✅ Supplementary CBAM, ECA and YOLOv26 compatibility checks
+- ✅ Reproducibility material for the submitted manuscript
 
-**Table 1. Dataset split statistics**
+---
 
-| Split      | Images | Crop Instances | Weed Instances | Total Instances |
-|------------|-------:|---------------:|---------------:|----------------:|
-| Train      |    104 |          1,461 |          6,512 |           7,973 |
-| Validation |     26 |            451 |          1,808 |           2,259 |
-| Test       |     26 |            257 |          1,711 |           1,968 |
-| **Total**  | **156**|        **2,169**|       **10,031**|        **12,200** |
+## 🧠 Main Research Question
 
-**Table S2. Effect of transfer learning on instance-segmentation performance (mask mAP50) for selected backbone modifications within the YOLO-Multispectral framework.**  
-Results are reported separately for training from scratch and transfer-learning initialisation, using identical dataset splits, training schedules, optimisation parameters, and evaluation protocols as described in Section 3. Reported mAP50 values correspond to the best validation performance achieved during training, and the associated Epoch denotes the mean epoch at which this best performance occurred across runs. Early stopping was applied uniformly across all experiments using identical patience criteria. Apparent differences in training duration therefore reflect differences in optimisation stability rather than differences in training protocol.
+Does RGB-pretrained transfer learning remain effective when YOLOv11x-seg is adapted from RGB to five-band multispectral input for remote-sensing object detection and instance segmentation?
 
-> **How to read Table S2**
-> - **Scratch** columns report training from scratch.
-> - **Transfer learning** columns report RGB-pretrained initialisation.
-> - **Δ mAP50** is calculated as **Transfer learning − Scratch**.
-> - **Δ Epoch** is calculated as **Transfer learning − Scratch**.  
->   Negative values indicate transfer learning reached its best validation result **earlier**; positive values indicate it peaked **later**.
+---
 
-| Bands       | Backbone modifications     | Scratch mAP50 | Scratch Epoch | **Transfer learning mAP50** | **Transfer learning Epoch** | Δ mAP50 | Δ Epoch |
-|-------------|----------------------------|--------------:|--------------:|----------------------------:|----------------------------:|--------:|--------:|
-| RGB         | None (baseline)            | 46.79 ± 0.56  |           467 | **51.16 ± 0.26**            | **163**                     | **+4.37**  | **-304** |
-| RGB         | CBAM                       | <0.01         |             1 | **49.13 ± 0.25**            | **344**                     | **> +49.12** | +343 |
-| RGB         | CBAM + Stage-1 WNN         | <0.011        |            79 | **48.82 ± 3.10**            | **424**                     | **> +48.81** | +345 |
-| RGB         | Stage-1 WNN                | 46.75 ± 0.80  |           471 | **49.64 ± 0.00**            | **200**                     | **+2.89**  | **-271** |
-| RGB         | ECA                        | 47.81 ± 0.85  |           389 | **51.95 ± 0.86**            | **186**                     | **+4.14**  | **-203** |
-| RGB         | DropBlock                  | 46.81 ± 0.21  |           572 | **52.01 ± 0.64**            | **452**                     | **+5.20**  | **-120** |
-| RGB         | GroupNorm                  | 38.84 ± 1.81  |           507 | **40.69 ± 0.00**            | **523**                     | **+1.85**  | +16 |
-| RGB         | Spectral                   | 29.66 ± 15.56 |           217 | **41.16 ± 3.68**            | **538**                     | **+11.50** | +321 |
-| RGB+NIR+RE  | None (baseline)            | 51.57 ± 1.10  |           511 | **56.42 ± 0.00**            | **237**                     | **+4.85**  | **-274** |
-| RGB+NIR+RE  | CBAM                       | <0.011        |             1 | **52.90 ± 1.00**            | **348**                     | **> +52.89** | +347 |
-| RGB+NIR+RE  | CBAM + Stage-1 WNN         | <0.011        |            35 | **52.73 ± 0.98**            | **334**                     | **> +52.72** | +299 |
-| RGB+NIR+RE  | Stage-1 WNN                | 50.81 ± 1.33  |           401 | **55.80 ± 0.00**            | **118**                     | **+4.99**  | **-283** |
-| RGB+NIR+RE  | ECA                        | 51.09 ± 1.12  |           357 | **55.40 ± 0.82**            | **280**                     | **+4.31**  | **-77** |
-| RGB+NIR+RE  | DropBlock                  | 50.55 ± 0.37  |           556 | **56.99 ± 0.29**            | **368**                     | **+6.44**  | **-188** |
-| RGB+NIR+RE  | GroupNorm                  | 40.57 ± 1.09  |           517 | **43.61 ± 0.00**            | **593**                     | **+3.04**  | +76 |
-| RGB+NIR+RE  | Spectral                   | 28.17 ± 11.25 |            73 | **45.87 ± 4.06**            | **413**                     | **+17.70** | +340 |
+## 🧩 Main Model Adaptation
 
-**Key pattern.** Across both RGB and RGB+NIR+RE settings, transfer learning consistently produced higher best validation mask mAP50 than training from scratch. In many configurations, it also reached peak performance earlier, although some extension variants converged later despite still achieving higher final mAP50.
+The base model is **YOLOv11x-seg**.
+
+For RGB experiments, the standard three-channel input configuration is used.
+
+For MS5 experiments, only the first convolutional layer of the input stem is expanded from three to five channels.
+
+The remaining model components are kept unchanged:
+
+- backbone;
+- neck;
+- segmentation head.
+
+### RGB-pretrained MS5 initialisation
+
+For RGB-pretrained five-band models:
+
+- weights for the original RGB channels are retained from the RGB-pretrained model;
+- the added NIR and red-edge channel weights are initialised using the average of the pretrained RGB input-stem weights.
+
+This keeps the transfer-learning comparison controlled and reproducible.
+
+### Scratch initialisation
+
+Scratch-trained models are randomly initialised using the standard non-pretrained YOLO initialisation pathway.
+
+---
+
+## 📦 Dataset
+
+Experiments use the public **WeedsGalore** multispectral UAV dataset.
+
+The dataset provides 600 × 600 pixel image tiles of RGB, NIR and red-edge imagery with semantic and instance annotations for crop and weed segmentation in maize fields.
+
+For this study, annotations are grouped into two instance-segmentation classes:
+
+- crop;
+- weed.
+
+The imagery has a ground sampling distance of approximately **2.5 mm per pixel**, giving each 600 × 600 tile an approximate ground footprint of **1.5 × 1.5 m**.
+
+### Dataset split used in this study
+
+| Split | Images | Crop instances | Weed instances | Total instances |
+|---|---:|---:|---:|---:|
+| Train | 104 | 1,461 | 6,512 | 7,973 |
+| Validation | 26 | 451 | 1,808 | 2,259 |
+| Test | 26 | 257 | 1,711 | 1,968 |
+| **Total** | **156** | **2,169** | **10,031** | **12,200** |
+
+---
+
+## 🧪 Main Experimental Conditions
+
+| Condition | Input | Initialisation | Description |
+|---|---|---|---|
+| RGB-scratch | RGB | Random | Standard RGB input, trained from scratch |
+| RGB-transfer | RGB | RGB-pretrained | Standard RGB input with pretrained YOLOv11x-seg initialisation |
+| MS5-scratch | RGB+NIR+red-edge | Random | Five-band input-stem adaptation, trained from scratch |
+| MS5-transfer | RGB+NIR+red-edge | RGB-pretrained | Five-band input-stem adaptation with retained RGB-pretrained weights |
+
+All four main experimental conditions use matched:
+
+- dataset partitions;
+- two-class crop/weed label structure;
+- image size;
+- batch size;
+- augmentation settings;
+- optimisation settings;
+- validation procedure;
+- early-stopping settings;
+- evaluation protocol.
+
+---
+
+## 📏 Evaluation Metrics
+
+YOLOv11x-seg jointly predicts:
+
+- bounding boxes;
+- instance masks.
+
+Therefore, both bounding-box and mask metrics are reported.
+
+The main reported metrics are:
+
+- **mAP50\(B\)**: bounding-box mAP at IoU 0.50
+- **mAP50-95\(B\)**: bounding-box mAP averaged over IoU 0.50–0.95
+- **mAP50\(M\)**: mask mAP at IoU 0.50
+- **mAP50-95\(M\)**: mask mAP averaged over IoU 0.50–0.95
+
+Mask mAP50, **mAP50\(M\)**, is treated as the primary metric because the study focuses on instance segmentation.
+
+All test-set values are reported as **mean ± standard deviation** across five seed-specific best-validation checkpoints.
+
+---
+
+## 📊 Main Test-Set Results
+
+Held-out test-set performance of YOLOv11x-seg trained with instance mask annotations.
+
+Metrics are reported on a 0–100 AP scale.
+
+| Condition | mAP50\(B\) | mAP50-95\(B\) | mAP50\(M\) | mAP50-95\(M\) |
+|---|---:|---:|---:|---:|
+| **MS5-transfer** | **79.23 ± 0.87** | **52.54 ± 1.32** | **74.14 ± 0.56** | **34.25 ± 0.90** |
+| RGB-transfer | 72.63 ± 0.84 | 45.25 ± 0.98 | 67.99 ± 1.16 | 28.44 ± 0.90 |
+| MS5-scratch | 76.57 ± 0.66 | 48.38 ± 0.87 | 71.40 ± 0.66 | 31.60 ± 0.68 |
+| RGB-scratch | 71.29 ± 0.71 | 42.72 ± 0.98 | 65.12 ± 0.57 | 25.38 ± 0.81 |
+
+---
+
+## 🔑 Key Findings
+
+The best-performing configuration was **MS5-transfer**.
+
+Compared with **RGB-transfer**, MS5-transfer improved:
+
+- **mAP50\(B\)** by **6.6 percentage points**
+- **mAP50\(M\)** by **6.2 percentage points**
+
+Compared with **MS5-scratch**, MS5-transfer improved:
+
+- **mAP50\(B\)** by **2.7 percentage points**
+- **mAP50\(M\)** by **2.7 percentage points**
+
+MS5-scratch also outperformed RGB-transfer on the held-out test set. This indicates that the additional NIR and red-edge bands provide useful task-specific information even without pretrained initialisation.
+
+Overall, the results indicate that:
+
+- multispectral input improves performance;
+- RGB-pretrained transfer learning improves performance;
+- the two benefits are complementary rather than mutually exclusive;
+- RGB-pretrained representations remain useful after moderate multispectral input expansion.
+
+---
+
+## 📈 Validation-Curve Summary
+
+Validation learning curves showed the same ordering for both bounding-box and mask mAP50:
+
+1. MS5-transfer
+2. MS5-scratch
+3. RGB-transfer
+4. RGB-scratch
+
+Best averaged validation points were:
+
+| Condition | Validation mAP50\(B\) | Validation mAP50\(M\) |
+|---|---:|---:|
+| MS5-transfer | 78.9 | 72.1 |
+| MS5-scratch | 76.1 | 69.8 |
+| RGB-transfer | 73.8 | 67.0 |
+| RGB-scratch | 70.7 | 63.7 |
+
+Transfer-learning runs reached strong validation performance earlier than scratch-trained runs, supporting their practical value for iterative remote-sensing model development.
+
+---
+
+## 🧠 Supplementary Compatibility Experiments
+
+Supplementary experiments are included to test whether the main transfer-learning pattern persists when lightweight attention modules or updated YOLO implementation code are introduced.
+
+These experiments are **not** the central benchmark contribution. They are included as compatibility checks.
+
+### CBAM and ECA attention extensions
+
+The supplementary attention experiments test selected lightweight feature-reweighting modules:
+
+| Module | Description |
+|---|---|
+| CBAM | Convolutional Block Attention Module |
+| ECA | Efficient Channel Attention |
+
+The attention modules are inserted after selected internal convolutional feature blocks in the YOLO backbone/neck feature-extraction pathway.
+
+The segmentation prediction head is not modified.
+
+The supplementary results show that:
+
+- ECA follows a similar transfer-learning pattern to the baseline configuration;
+- CBAM reduces performance in this setting;
+- scratch-trained CBAM fails to converge to a useful solution, with validation mask mAP50 remaining near zero.
+
+These results support the practical conclusion that attention modules should be treated as optional refinements, not replacements for a strong pretrained baseline.
+
+### YOLOv26 compatibility check
+
+The same minimal five-band input-stem adaptation was also ported to an updated YOLOv26 segmentation codebase.
+
+This compatibility check tests whether the input-stem modification can be reapplied as YOLO implementations evolve.
+
+The updated implementation shows the same qualitative pattern as the main YOLOv11x-seg experiments, with RGB-pretrained initialisation remaining beneficial after multispectral input expansion.
+
+---
+
+## 📎 Supplementary Material
+
+The supplementary material includes:
+
+- **Supplementary Figure S1**: location of CBAM and ECA attention modifications in selected YOLO convolutional feature blocks.
+- **Supplementary Figure S2**: validation mask mAP50 learning curves for CBAM and ECA attention-extension experiments.
+- **Supplementary Figure S3**: validation bounding-box and mask mAP50 learning curves for the YOLOv26 implementation compatibility check.
+- **Supplementary Table S1**: training and evaluation settings for the main YOLOv11x-seg experiments.
+
+---
+
+## ⚙️ Training and Evaluation Settings
+
+| Setting | Value |
+|---|---|
+| Dataset | WeedsGalore |
+| Split protocol | Official train, validation and test partitions |
+| Classes | Two classes: crop and weed |
+| Input configurations | RGB; MS5 |
+| Model | YOLOv11x-seg |
+| Multispectral modification | First convolutional input-stem layer expanded from 3 to 5 channels |
+| Unchanged model components | Backbone, neck and segmentation head |
+| Pretrained RGB channels | Retained from RGB-pretrained weights |
+| Added NIR/red-edge channels | Initialised from the average of pretrained RGB stem weights |
+| Scratch models | Random initialisation |
+| Main experimental conditions | RGB-scratch; RGB-transfer; MS5-scratch; MS5-transfer |
+| Random seeds | 0, 1, 2, 3, 4 |
+| Maximum epochs | 500 |
+| Early stopping patience | 50 epochs |
+| Best checkpoint selection | Best validation mask mAP50 checkpoint for each seed |
+| Primary validation metric | Mask mAP50 \[mAP50\(M\)\] |
+| Reported test metrics | mAP50\(B\), mAP50-95\(B\), mAP50\(M\), mAP50-95\(M\) |
+| Result summary | Mean ± standard deviation across five seed-specific best-validation checkpoints |
+| Learning-curve averaging | Complete-case epoch-aligned mean across five seeds |
+| Image size | 600 |
+| Batch size | 8 |
+| Hardware | NVIDIA RTX 5090 |
+| Software | Modified Ultralytics YOLOv11x-seg source |
+| Other settings | Default Ultralytics YOLOv11x-seg segmentation settings unless otherwise specified |
 
 ---
 
 ## 🚀 Reproduce the Experiments
 
-Detailed instructions are provided in:
+Detailed reproduction material is provided in the repository.
 
-- 📁 `paper/README.md` – paper context & experiment overview  
-- 📁 `repro/README.md` – exact commands to reproduce results
+Recommended starting points:
+
+- `paper/README.md` — paper context and experiment overview
+- `repro/README.md` — exact reproduction notes and commands
+- `datasets/` — dataset configuration files
+- `code/` — training, evaluation and plotting scripts
+- `assets/` — figures and supporting material
+- `docs/` — supplementary notes and additional documentation
 
 ### Google Colab
 Run the multispectral YOLO demo in Colab:
 
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](
-https://colab.research.google.com/github/aesparon/YOLO-MultiSpectral/blob/main/examples/notebooks/YOLO-MultiSpectral_demo.ipynb
+https://colab.research.google.com/github/aesparon/YOLO-MultiSpectral/blob/main/notebooks/rsl_transfer_learning_repro_V3.ipynb
 )
 
 ---
@@ -159,10 +366,9 @@ https://colab.research.google.com/github/aesparon/YOLO-MultiSpectral/blob/main/e
 If you use this repository, please cite:
 
 ```bibtex
-@misc{esparon_yolo_multispectral_2025,
-  author = {Esparon, Andrew James},
-  title  = {YOLO-Multispectral: Maintaining Transfer Learning in YOLOv11 for Multispectral Remote Sensing},
-  year   = {2025},
-  url    = {https://github.com/aesparon/YOLO-Multispectral},
+@misc{esparon_yolo_multispectral_2026,
+  author = {Esparon, Andrew and Gautam, Deepak},
+  title = {YOLO-Multispectral: RGB-pretrained transfer learning for multispectral remote-sensing instance segmentation},
+  year = {2026},
+  url = {https://github.com/aesparon/YOLO-Multispectral}
 }
-```
